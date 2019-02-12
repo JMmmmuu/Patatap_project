@@ -4,21 +4,24 @@
 
     <!-- metadata goes in the head -->
     <title>Patatap</title>
-    <script type-"text/javascript" src="src/paper-full.js"></script>
+    <script type="text/javascript" src="src/paper-full.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.1/howler.js"></script>"
+    <script type="text/javascript" src="src/data.js"></script>
 
     <script type="text/paperscript" canvas="myCanvas">
 
         var circles = [];
-        console.log("djlsfk");
-
 
         function onKeyDown(event) {
-            var randX = paper.view.size.width * Math.random();
-            var randY = paper.view.size.height * Math.random();
-
-            var newCircle = new paper.Path.Circle(new paper.Point(randX, randY), 500);
-            newCircle.fillColor = 'orange';
-            circles.push(newCircle);
+            if(data[event.key]) {
+                var randX = paper.view.size.width * Math.random();
+                var randY = paper.view.size.height * Math.random();
+                var newCircle = new paper.Path.Circle(new paper.Point(randX, randY), 500);
+                
+                newCircle.fillColor = data[event.key].color;
+                data[event.key].sound.play();
+                circles.push(newCircle);
+            }
         }
 
         function onFrame(event) {
@@ -28,12 +31,7 @@
             }
         }
 
-  
-        }
-
-        
     </script>
-
     <link rel="stylesheet" type="text/css" href="circles.css">
 
 </head>
